@@ -1,11 +1,11 @@
 package publicItems;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 public class SignalItem {
 	private String subject;
-	private Date start_time;
-	private Date end_time;
+	private Calendar start_time;
+	private Calendar end_time;
 	private int sigqual;
 	private ArrayList<Integer> rawWave;
 	
@@ -16,16 +16,16 @@ public class SignalItem {
 		this.subject = subject;
 	}
 	
-	public Date getStart_time(){
+	public Calendar getStart_time(){
 		return this.start_time;
 	}
-	public void setStart_time(Date startTime){
+	public void setStart_time(Calendar startTime){
 		this.start_time = startTime;
 	}
-	public Date getEnd_time(){
+	public Calendar getEnd_time(){
 		return this.end_time;
 	}
-	public void setEnd_time(Date EndTime){
+	public void setEnd_time(Calendar EndTime){
 		this.end_time = EndTime;
 	}
 	public int getSignalQuality(){
