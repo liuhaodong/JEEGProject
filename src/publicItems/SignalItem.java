@@ -1,4 +1,4 @@
-package model1;
+package publicItems;
 
 import java.util.ArrayList;
 import java.util.Date;
