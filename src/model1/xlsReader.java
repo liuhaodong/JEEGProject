@@ -17,6 +17,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.supercsv.prefs.CsvPreference;
 
 import publicItems.SignalItem;
+import publicItems.TaskItem;
 
 import jxl.*;
 import jxl.read.biff.BiffException;
@@ -29,7 +30,7 @@ public class xlsReader {
 	}*/
 	
 	public HashMap<String, ArrayList<SignalItem>> getEEGSignal(String path) throws BiffException, IOException, ParseException{
-		File file = new File("eeg_data_thinkgear_2013_2014.csv");
+		File file = new File(path);
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;
 		HashMap<String,ArrayList<SignalItem>> signalTable = new HashMap<>();
@@ -44,7 +45,9 @@ public class xlsReader {
             start.setTime(format.parse(element[2]));
             end.setTime(format.parse(element[3]));
             item.setSignalQuality(Integer.parseInt(element[6]));
+            //System.out.println(element[17]);
             item.setRawWave(element[17]);
+            
             if (signalTable.containsKey(item.getSubject())) {
 				signalTable.get(item.getSubject()).add(item);
 			}else {
@@ -56,10 +59,39 @@ public class xlsReader {
 		return signalTable;
 	}
 	
+	public ArrayList<TaskItem> getTaskItem(String path) throws ParseException, IOException {
+		File file = new File(path);
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String line;
+		ArrayList<TaskItem> taskItemList = new ArrayList<>();
+		//HashMap<String,ArrayList<SignalItem>> taskTable = new HashMap<>();
+		line = br.readLine();
+        while((line = br.readLine()) != null) {
+        	TaskItem item = new TaskItem();
+            String [] element = line.split("\t");
+            item.setSubject(element[1]);
+            item.setMachine(element[0]);
+            Calendar start = Calendar.getInstance();
+            Calendar end = Calendar.getInstance();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            start.setTime(format.parse(element[2]));
+            end.setTime(format.parse(element[3]));
+            item.setStim(element[4]);
+            item.setBlock(element[5]);
+            item.setCorrect(element[6]);
+            item.setLatency(element[7]);
+            item.setFluent(element[8]);
+            item.setLearning(element[9]);
+         
+            taskItemList.add(item);
+       }
+		return taskItemList;
+	}
+	
 	public static void main(String [] args) throws IOException, ParseException, BiffException{
-		HashMap<String, ArrayList<SignalItem>> list = new HashMap<>();
+		ArrayList<TaskItem> list = new ArrayList();
 		xlsReader reader = new xlsReader();
-		list = reader.getEEGSignal("eeg_data_thinkgear_2013_2014.csv");
-		System.out.println(list.size());
+		list = reader.getTaskItem("eeg_lex_learning_2013_2014.csv");
+		System.out.println(list.get(1).getMachine());
 	}
 }

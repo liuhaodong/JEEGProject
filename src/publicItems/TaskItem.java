@@ -20,7 +20,7 @@ public class TaskItem {
 		return correct;
 	}
 	public void setCorrect(String correct){
-		int tmp = Integer.getInteger(correct);
+		int tmp = Integer.parseInt(correct);
 		this.correct = tmp;
 	}
 	
@@ -70,10 +70,10 @@ public class TaskItem {
 	}
 	
 	public boolean setLatency(String latency){
-		if (latency.equals("/N")) {
+		if (latency.equals("\\N")) {
 			this.latency = 0;
 		}else {
-			double tmp = Double.valueOf(latency);
+			double tmp = Double.parseDouble(latency);
 			this.latency = tmp;
 		}
 		return true;
@@ -85,7 +85,7 @@ public class TaskItem {
 	}
 	
 	public boolean setFluent(String fluent){
-		int tmp = Integer.getInteger(fluent);
+		int tmp = Integer.parseInt(fluent);
 		this.fluent = tmp;
 		return true;
 	}
@@ -95,7 +95,7 @@ public class TaskItem {
 	}
 	
 	public boolean setLearning(String learning){
-		int tmp = Integer.getInteger(learning);
+		int tmp = Integer.parseInt(learning);
 		this.learning = tmp;
 		return true;
 	}

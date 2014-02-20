@@ -7,7 +7,7 @@ public class SignalItem {
 	private Calendar start_time;
 	private Calendar end_time;
 	private int sigqual;
-	private ArrayList<Integer> rawWave;
+	private ArrayList<Integer> rawWave = new ArrayList<>();
 	
 	public String getSubject(){
 		return subject;
@@ -40,10 +40,10 @@ public class SignalItem {
 	}
 	
 	public boolean setRawWave(String rawWave){
-		this.rawWave.clear();
+		//this.rawWave.clear();
 		String[] waveData = rawWave.split(" ");
 		for(String tmp: waveData){
-			int waveDot = Integer.getInteger(tmp);
+			int waveDot = Integer.parseInt(tmp);
 			this.rawWave.add(waveDot);
 		}
 		return true;
