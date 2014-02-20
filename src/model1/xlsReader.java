@@ -43,7 +43,7 @@ public class xlsReader {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             start.setTime(format.parse(element[2]));
             end.setTime(format.parse(element[3]));
-            item.setSignalQuality(Integer.getInteger(element[6]));
+            item.setSignalQuality(Integer.parseInt(element[6]));
             item.setRawWave(element[17]);
             if (signalTable.containsKey(item.getSubject())) {
 				signalTable.get(item.getSubject()).add(item);
